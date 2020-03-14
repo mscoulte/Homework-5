@@ -1,15 +1,18 @@
+//Grabbing current Hour value and storing it in variable.
 let currentHour = moment().format("H");
 
+//Grabbing current date and applying value to <p> tag.
 $(document).ready(function() {
   currentDay = moment().format("dddd, MMMM Do YYYY");
   let current = $("#currentDay").text(currentDay);
 
-  console.log(currentHour);
+  //Calling on functions to run.
   checkTime();
   getStorage();
   addStorage();
 });
 
+//Grabbing saved local storage values from browser.
 function getStorage() {
   $("#9txt").html(localStorage.getItem("9AM"));
   $("#10txt").html(localStorage.getItem("10AM"));
@@ -22,6 +25,7 @@ function getStorage() {
   $("#5txt").html(localStorage.getItem("5PM"));
 }
 
+//Creating/Overwriting local storage keys and assigning them values based on the text area contents.
 function addStorage() {
   $("#9btn").on("click", function() {
     localStorage.setItem("9AM", $("#9txt").val());
@@ -52,6 +56,7 @@ function addStorage() {
   });
 }
 
+//Setting appropriate colors for time blocks based on the current hour of the day by adding classes to the specific text area.
 function checkTime() {
   if (currentHour < 9) {
     $("#9txt").addClass("future");
